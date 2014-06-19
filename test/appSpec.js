@@ -46,4 +46,11 @@ describe('Movie tests:', function() {
         expect(movieSnob.statement()).toMatch(/Amount owed is 12/);
         expect(movieSnob.statement()).toMatch(/You earned 1 frequent renter points/);
     });
+
+    it('new release rental and a regular release rental', function() {
+        movieSnob.addRental(newReleaseRental);
+        movieSnob.addRental(regularRental);
+        expect(movieSnob.statement()).toMatch(/Amount owed is 8/);
+        expect(movieSnob.statement()).toMatch(/You earned 3 frequent renter points/);
+    });
 });
