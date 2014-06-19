@@ -26,7 +26,6 @@ Customer.prototype.statement = function() {
                 break;
             case jsRefactoring.movieTypes.NEW_RELEASE:
                 amount += rental.daysRented * 3;
-                console.log(amount);
                 break;
             case jsRefactoring.movieTypes.CHILDRENS:
                 amount += 1.5;
