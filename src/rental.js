@@ -27,3 +27,7 @@ Rental.prototype.charge = function() {
 
     return result;
 };
+
+Rental.prototype.frequentRenterPoints = function(rental) {
+    return (this.movie.priceCode == jsRefactoring.movieTypes.NEW_RELEASE && this.daysRented > 1) ? 2 : 1;
+};

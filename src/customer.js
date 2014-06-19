@@ -13,13 +13,7 @@ Customer.prototype.statement = function() {
         result = "Rental Record for " + this.name + "\n";
 
     for (var i = 0; i < this.rentals.length; i++) {
-        // add frequent renter points
-        frequentRenterPoints += 1;
-
-        // add bonus for a two day new release rental
-        if (this.rentals[i].movie.priceCode == jsRefactoring.movieTypes.NEW_RELEASE && this.rentals[i].daysRented > 1) {
-            frequentRenterPoints += 1;
-        }
+        frequentRenterPoints = this.rentals[i].frequentRenterPoints();
 
         // show figures for this rental
         result += "\t" + this.rentals[i].movie.title + "\t" + this.rentals[i].charge() + "\n";
