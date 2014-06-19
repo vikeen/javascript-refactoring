@@ -14,26 +14,7 @@ Customer.prototype.statement = function() {
 
     for (var i = 0; i < this.rentals.length; i++) {
         var rental = this.rentals[i],
-            amount = 0;
-
-        // determine amounts for each line
-        switch (rental.movie.priceCode) {
-            case jsRefactoring.movieTypes.REGULAR:
-                amount += 2;
-                if (rental.daysRented > 2) {
-                    amount += (rental.daysRented - 2) * 1.5;
-                }
-                break;
-            case jsRefactoring.movieTypes.NEW_RELEASE:
-                amount += rental.daysRented * 3;
-                break;
-            case jsRefactoring.movieTypes.CHILDRENS:
-                amount += 1.5;
-                if (rental.daysRented > 3) {
-                    amount += (rental.daysRented - 3) * 1.5;
-                }
-                break;
-        }
+            amount = this.calculateAmount(rental);
 
         // add frequent renter points
         frequentRenterPoints += 1;
@@ -51,5 +32,30 @@ Customer.prototype.statement = function() {
     // add footer lines
     result += "Amount owed is " + totalAmount + "\n";
     result += "You earned " + frequentRenterPoints + " frequent renter points";
+    return result;
+};
+
+Customer.prototype.calculateAmount = function(rental) {
+    result = 0;
+
+    // determine amounts for each line
+    switch (rental.movie.priceCode) {
+        case jsRefactoring.movieTypes.REGULAR:
+            result += 2;
+            if (rental.daysRented > 2) {
+                result += (rental.daysRented - 2) * 1.5;
+            }
+            break;
+        case jsRefactoring.movieTypes.NEW_RELEASE:
+            result += rental.daysRented * 3;
+            break;
+        case jsRefactoring.movieTypes.CHILDRENS:
+            result += 1.5;
+            if (rental.daysRented > 3) {
+                result += (rental.daysRented - 3) * 1.5;
+            }
+            break;
+    }
+
     return result;
 };
