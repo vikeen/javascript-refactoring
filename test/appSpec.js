@@ -1,8 +1,8 @@
 // Movie Stubs
 describe('Movie tests:', function() {
-    var newReleaseMovie = new Movie('Die Hard', jsRefactoring.movieTypes.NEW_RELEASE),
-        regularMovie = new Movie('Indiana Jones', jsRefactoring.movieTypes.REGULAR),
-        childrensMovie = new Movie('Frozen', jsRefactoring.movieTypes.CHILDRENS);
+    var newReleaseMovie = new Movie('Die Hard', 'NEW_RELEASE'),
+        regularMovie = new Movie('Indiana Jones', 'REGULAR'),
+        childrensMovie = new Movie('Frozen', 'CHILDRENS');
 
     // Rental stubs for our movies
     var newReleaseRental = new Rental(newReleaseMovie, 2),
