@@ -1,1 +1,0 @@
-window.jsRefactoring = window.jsRefactoring || {};
