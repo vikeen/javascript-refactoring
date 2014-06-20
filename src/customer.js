@@ -8,31 +8,45 @@ Customer.prototype.addRental = function(rental) {
 };
 
 Customer.prototype.statement = function() {
-    var totalAmount = 0,
-        frequentRenterPoints = 0,
-        result = "Rental Record for " + this.name + "\n";
+    var result = "Rental Record for " + this.name + "\n";
 
     for (var i = 0; i < this.rentals.length; i++) {
-        var rental = this.rentals[i],
-            amount = rental.charge();
-
-
-
-        // add frequent renter points
-        frequentRenterPoints += 1;
-
-        // add bonus for a two day new release rental
-        if (rental.movie.priceCode == jsRefactoring.movieTypes.NEW_RELEASE && rental.daysRented > 1) {
-            frequentRenterPoints += 1;
-        }
-
         // show figures for this rental
-        result += "\t" + rental.movie.title + "\t" + amount + "\n";
-        totalAmount += amount;
+        result += "\t" + this.rentals[i].movie.title + "\t" + this.rentals[i].charge() + "\n";
     }
 
     // add footer lines
-    result += "Amount owed is " + totalAmount + "\n";
-    result += "You earned " + frequentRenterPoints + " frequent renter points";
+    result += "Amount owed is " + this.totalCharge() + "\n";
+    result += "You earned " + this.totalFrequentRenterPoints() + " frequent renter points";
+    return result;
+};
+
+Customer.prototype.htmlStatement = function() {
+    var result = "<h1>Rental Record for <em>" + this.name + "</em></h1><p>\n";
+
+    for (var i = 0; i < this.rentals.length; i++) {
+        // show figures for this rental
+        result += "\t" + this.rentals[i].movie.title + "\t" + this.rentals[i].charge() + "<br/>\n";
+    }
+
+    // add footer lines
+    result += "</p><p>Amount owed is <em>" + this.totalCharge() + "</em></p>\n";
+    result += "<p>You earned <em>" + this.totalFrequentRenterPoints() + "</em> frequent renter points</p>";
+    return result;
+};
+
+Customer.prototype.totalCharge = function() {
+    var result = 0;
+    for (var i = 0; i < this.rentals.length; i++) {
+        result += this.rentals[i].charge();
+    }
+    return result;
+};
+
+Customer.prototype.totalFrequentRenterPoints = function() {
+    var result = 0;
+    for (var i = 0; i < this.rentals.length; i++) {
+        result += this.rentals[i].frequentRenterPoints();
+    }
     return result;
 };
